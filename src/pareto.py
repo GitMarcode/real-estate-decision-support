@@ -6,6 +6,9 @@ import pandas as pd
 import numpy as np
 from typing import List, Set, Dict
 
+# Default normalized value when min equals max (no variation in criterion)
+DEFAULT_NORMALIZED_VALUE = 0.5
+
 
 class ParetoOptimizer:
     """
@@ -126,7 +129,8 @@ class ParetoOptimizer:
                 if max_val - min_val > 0:
                     norm_val = (val - min_val) / (max_val - min_val)
                 else:
-                    norm_val = 0.5
+                    # When all values are the same, use default (neutral) value
+                    norm_val = DEFAULT_NORMALIZED_VALUE
                 
                 # Invert if minimization criterion
                 if not self.maximize[i]:

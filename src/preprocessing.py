@@ -80,8 +80,11 @@ class PropertyDataPreprocessor:
                 axis=1
             )
         
-        # Location score (placeholder - would be based on actual location data)
+        # Location score (placeholder - in production, this should be based on 
+        # actual location data such as proximity to amenities, transport, schools, etc.)
+        # For demonstration purposes, we assign random scores
         if 'municipality' in df.columns:
+            # TODO: Replace with actual location scoring logic
             df_features['location_score'] = np.random.uniform(0.5, 1.0, len(df_features))
         
         print(f"Feature engineering complete. Total features: {len(df_features.columns)}")

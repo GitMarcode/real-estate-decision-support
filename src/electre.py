@@ -7,6 +7,9 @@ import pandas as pd
 import numpy as np
 from typing import Dict, List, Tuple, Optional
 
+# Small constant to avoid division by zero
+EPSILON = 1e-10
+
 
 class ELECTREIII:
     """
@@ -138,7 +141,7 @@ class ELECTREIII:
             Credibility degree [0, 1]
         """
         if discordance >= concordance:
-            return concordance * (1 - discordance) / (1 - concordance + 1e-10)
+            return concordance * (1 - discordance) / (1 - concordance + EPSILON)
         else:
             return concordance
     
