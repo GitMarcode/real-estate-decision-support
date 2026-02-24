@@ -1,40 +1,38 @@
-﻿# Real Estate Investment Decision Support System
+# Real Estate Investment Decision Support (Paris) — ELECTRE III + Pareto
 
-Multi-criteria decision analysis tool for identifying optimal rental property investments in the Paris region using ELECTRE III methodology.
+Multi-criteria decision analysis (MCDA) tool to identify **robust rental property investments** in the Paris region using **ELECTRE III** and **Pareto optimization** on **11,565 properties**.
 
-## Key Features
+## Problem
+How to rank and select real-estate investment opportunities when profitability depends on multiple conflicting criteria (ROI, cash flow, price/m², yield, etc.), not a single metric.
 
-- **Data Sources**: French government open data (DVF land registry + DHUP rent data)
-- **Analysis Scale**: 11,565 properties
-- **Methodology**: ELECTRE III with Pareto filtering
+## Method
+- **Data ingestion** from French open data:
+  - DVF (land registry / transactions)
+  - DHUP (rent data)
+- **Preprocessing & feature engineering** for investment metrics (ROI, cash flow, yield, price/m², …)
+- **Pareto filtering** to remove clearly dominated options
+- **ELECTRE III** (outranking) to obtain a robust core of best candidates under preference/threshold modeling
+
+## Data
+- **Scale**: 11,565 properties
 - **Criteria**: 8 financial metrics (ROI, cash flow, price/m², rental yield, etc.)
-- **Output**: 3 optimal investment opportunities (ROI >24%, €33k+ annual cash flow)
+- **Sources**: French government open data (DVF + DHUP)
 
-## Technologies
+> Note: if the dataset is not included in the repository, the notebook reproduces the pipeline from the APIs.
 
-- Python 3.x
-- pandas, NumPy
-- matplotlib, seaborn
-- ELECTRE III algorithm
-- REST APIs (DVF, DHUP)
+## Results (high level)
+Identified a robust core of **3 optimal properties** with:
+- **ROI**: > 24%
+- **Annual cash flow**: > €33,000
+- **Price point**: < €1,600/m²
 
-## Results
+(See the notebook for full details, plots and intermediate outputs.)
 
-Identified robust core of 3 optimal properties with:
-- **ROI**: >24%
-- **Annual Cash Flow**: >€33,000
-- **Price Point**: <€1,600/m²
+## Reproduce
+### 1) Setup
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+source .venv/bin/activate
 
-## Context
-
-Academic project - Master 1 Data Science, Université Paris Dauphine-PSL (2025-2026)
-
-## Author
-
-**Marwane Bennat**
-- 🎓 M1 Data Science, Université Paris Dauphine-PSL
-- 🐙 [GitHub](https://github.com/GitMarcode)
-
-## License
-
-This project is licensed under the MIT License.
+pip install -r requirements.txt
